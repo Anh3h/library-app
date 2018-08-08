@@ -1,0 +1,11 @@
+.align-right {
+    float: right;
+}
+.card {
+    padding-left: 5%;
+    padding-right: 5%
+}
+.signup-container {
+    margin-left: 30%;
+    margin-top: 15%
+}
