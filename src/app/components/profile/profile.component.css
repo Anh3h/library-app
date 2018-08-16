@@ -1,0 +1,19 @@
+.container-fluid {
+    margin-top: 6%;
+}
+.profile-pic {
+    width: 20%;
+    height: 130px;
+    display: inline-block;
+    margin-left: 70%;
+    margin-bottom: 2%;
+    margin-top: -7%;
+    padding: 1%;
+    padding-top: 2%;
+    border: 1px #00000075 solid;
+    border-radius: 2px;
+    text-align: center;
+}
+.header {
+    font-size: 18px;
+}

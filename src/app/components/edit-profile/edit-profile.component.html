@@ -1,0 +1,37 @@
+<div class="container">
+  <div class="row profile-container">
+    <div class="card col-sm-7 offset-s3" >
+      <div class="card-body">
+        <h5 class="card-title" style="text-align: center">UPDATE PROFILE</h5>
+        <form (ngSubmit)="updateUser()" #editProfileForm="ngForm">
+          <div *ngIf="error.status" class="alert alert-danger center" role="alert">
+            {{ error.message }}
+          </div>
+          <div class="form-group row">
+            <label for="firstName" class="bmd-label-floating">First Name *</label>
+            <input type="text" [(ngModel)]="user.firstName" class="form-control" name="firstName" placeholder="First Name" required>
+          </div>
+          <div class="form-group row">
+            <label for="lastName" class="bmd-label-floating">Last Name *</label>
+            <input type="text" [(ngModel)]="user.lastName"  class="form-control" name ="lastName" placeholder="Last Name" required>
+          </div>
+          <div class="form-group row">
+            <label for="dob" class="bmd-label-floating">Date of Birth</label>
+            <input type="datetime" [(ngModel)]="user.dob" class="form-control" id="dob" name="dob" placeholder="Date of Birth">
+          </div>
+          <div class="form-group row">
+            <label for="telephone" class="bmd-label-floating">Telephone</label>
+            <input type="tel" [(ngModel)]="user.telephone"  class="form-control" name="telephone" placeholder="Telephone">
+          </div>
+          <div class="form-group row">
+            <a routerLink="/reset-password" class="reset-pwd">Update Password</a>
+            <span class="col-sm-12">
+              <button type="submit" [disabled]="!editProfileForm.form.valid" class="btn btn-raised btn-warning align-right">UPDATE</button>
+            </span>
+          </div>
+        </form>
+        <app-snack-bar [snackbar]="snackbar"></app-snack-bar>
+      </div>
+    </div>
+  </div>
+</div>

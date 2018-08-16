@@ -2,7 +2,7 @@
   <div class="home-image">
       <p class="main-text">A BOOK IS A DREAM THAT YOU HOLD IN YOUR HANDS</p>
       <p class="sub-text">With House of Word you can review, reserve and read any book in our library.</p>
-      <button type="button" routerLink="/sign-up" class="btn btn-raised btn-warning sign-up-btn">Create an account</button>
+      <button type="button" *ngIf="!isAuthenticated" routerLink="/sign-up" class="btn btn-raised btn-warning sign-up-btn">Create an account</button>
   </div>
   <app-home-grid></app-home-grid>
 </div>

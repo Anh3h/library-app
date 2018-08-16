@@ -1,0 +1,51 @@
+<div class="container-fluid">
+  <div class="container card">
+    <div class="card-body">
+      <h5 class="card-title">{{user.firstName}} {{user.lastName}}</h5>
+      <hr>
+      <div>
+        <div>
+          <span>
+            <p><strong>Email Address</strong></p>
+            <p>{{ user.email }}</p>
+          </span>
+          <span class="profile-pic">
+            <i class="material-icons"  style="font-size: 40px; margin-left: -10px;">perm_identity</i>
+            <p>ADD A PROFILE PICTURE</p>
+          </span>
+        </div>
+        <button routerLink="/edit-profile" type="button" class="btn btn-raised btn-warning">UPDATE PROFILE</button>
+        <hr>
+        <p class="header">Book Request</p>
+        <div>
+          <table class="table table-hover">
+            <thead class="thead-light">
+              <tr>
+                <!-- <th scope="col">#</th> -->
+                <th scope="col">Book Title</th>
+                <th scope="col">Author</th>
+                <th scope="col">Edition</th>
+                <th scope="col">Check-in</th>
+                <th scope="col">Check-in Status</th>
+                <th scope="col">Check-out</th>
+                <th scope="col">Check-out Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let transaction of transactions">
+                <!-- <th scope="row">1</th> -->
+                <td>{{transaction.book.title}}</td>
+                <td>{{transaction.book.author}}</td>
+                <td>{{transaction.book.edition}}</td>
+                <td>{{transaction.checkOut | date:'medium'}}</td>
+                <td>{{transaction.checkInStatus}}</td>
+                <td>{{transaction.checkIn | date:'medium'}}</td>
+                <td>{{transaction.checkOutStatus}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

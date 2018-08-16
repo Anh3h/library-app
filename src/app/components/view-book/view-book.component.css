@@ -1,28 +1,27 @@
-.row {
-    margin-top: 10%;
+.comment {
+    margin-top: 2%
 }
-p {
-    padding: 0px;
-    margin: 1px;
-    padding-left: 5%;
-    font-size: 16px;
+.books {
+    margin-bottom: 3%;
 }
 .title {
-    font-size: 20px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
-.white {
-    background-color: #FFF;
+.book-img {
+    width: 15rem; height: 15rem;
 }
-.card-containers {
-    display: inline-block;
+.side-box {
+    border-left: rgba(0, 0, 0, 0.164) 2px solid
 }
-.context {
-    margin-left: 5%;
+.side-img {
+    width: 5rem; height: 5rem;
 }
-.reserve-btn {
-    float: right;
-    margin-top: 10%;
+.margin-4 {
+    margin-left: 4%;
 }
-.align-right {
-    float: right;
+.spacing-0 {
+    padding: 0px;
+    margin: 0px;
 }

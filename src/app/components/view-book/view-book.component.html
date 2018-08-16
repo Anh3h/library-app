@@ -1,66 +1,80 @@
-<div class="container">
+<div class="container" style="margin-top: 8%">
   <div class="row">
-    <div class="card col-7 offset-sm-3" style="width: 50rem;">
-      <div class="card-body" style="padding: 5%">
-        <span class="card-containers">
-          <img class="card-img-top" style="width: 15rem; height: 15rem;" src="../../../assets/book1.jpg" alt="Card image cap">
-        </span>
-        <span class="card-containers context">
-          <p class="card-title" style="margin: 0px; padding: 0px; font-size: 20px">
-            <strong>Title: </strong>C Modern Approach
-          </p>
-          <div class="card-text">
-              <p style="margin: 0px; padding: 0px"><strong>Edition: </strong> 1.02.45</p>
-              <p style="margin: 0px; padding: 0px"><strong>Author: </strong>Dietel</p>
-              <p style="margin: 0px; padding: 0px"><strong>Publisher: </strong>Dietel</p>
+    <p style="font-size: 25px">{{ book.title }}</p>
+  </div>
+  <div class="container">
+    <div class="row" style="margin: 2%">
+      <div class="col-2 ">
+          <div>
+                <img class="card-img-top book-img" *ngIf="book.coverImage" src="{{book.coverImage}}" alt="Book cover image">
+                <img class="card-img-top book-img" *ngIf="!book.coverImage"  src="../../../assets/default-img.jpg" alt="Book cover image">
           </div>
-          <a (click)="custom_router(book_id)" class="reserve-btn btn btn-raised btn-warning align-right">RESERVE</a>
-        </span>
+      </div>
+      <div class="col-4 offset-2">
+          <p class="spacing-0">By {{ book.author }}</p>
+          <p class="spacing-0"><strong>ISBN </strong><span>{{ book.edition }}</span></p>
+
+          <button type="submit" style="margin-top: 20%" class="btn btn-raised btn-warning" data-toggle="modal" data-target="#reserveModal">Reserve</button>
+      </div>
+      <div class="col-4 side-box">
+          <h5>Popular Books</h5>
+        <div class="row books" *ngFor="let book1 of popularBooks">
+            <div class="col-5 offset-1">
+                <img class="card-img-top img-fluid side-img" *ngIf="book1.coverImage" src="{{book1.coverImage}}" alt="Book cover image">
+                <img class="card-img-top img-fluid side-img" *ngIf="!book1.coverImage" src="../../../assets/default-img.jpg" alt="Book cover image">
+            </div>
+            <div class="col-6">
+                <p class="title spacing-0 margin-4"><strong>Title: </strong> {{ book1.title }}</p>
+                <p class="spacing-0 margin-4" ><strong>By: </strong> {{ book1.author }}</p>
+            </div>
+        </div>
       </div>
     </div>
   </div>
-  <div class="row" style="margin-top: 3%;">
-    <strong>Popular books</strong>
-  </div>
-  <div class="row"  style="margin-top: 2%; margin-bottom: 3%">
-    <div class="card" style="width: 15rem; margin-right: 5%">
-      <img class="card-img-top" style="width: 15rem; height: 15rem;" src="../../../assets/book1.jpg" alt="Card image cap">
-      <div class="card-body" style="padding: 5%">
-        <p class="card-title" style="margin: 0px; padding: 0px; font-size: 20px">C Modern Approach</p>
-        <div class="card-text">
-            <p style="margin: 0px; padding: 0px"><strong>Edition: </strong> 1.02.45</p>
+  <div class="container" style="margin-top: 5%">
+    <h4>Reviews</h4>
+    <div class="row comment" *ngFor="let comment of comments ">
+        <i class="material-icons" style="font-size: 40px;">account_circle</i>
+        <div class="alert alert-secondary col-7" style="margin-left: 3%" role="alert">
+            {{ comment.text }}
         </div>
-        <a style="margin: 0px;" (click)="custom_router(book_id)" class="btn btn-raised btn-warning align-right">VIEW</a>
-      </div>
     </div>
-    <div class="card" style="width: 15rem; margin-right: 5%">
-      <img class="card-img-top" style="width: 15rem; height: 15rem;" src="../../../assets/book2.jpeg" alt="Card image cap">
-      <div class="card-body" style="padding: 5%">
-        <p class="card-title" style="margin: 0px; padding: 0px; font-size: 20px">C Modern Approach</p>
-        <div class="card-text">
-            <p style="margin: 0px; padding: 0px"><strong>Edition: </strong> 1.02.45</p>
-        </div>
-        <a style="margin: 0px;" href="#" class="btn btn-raised btn-warning align-right">VIEW</a>
-      </div>
+    <div class="row comment">
+        <form class="col-8">
+            <div class="form-group">
+                <label for="comment" class="bmd-label-floating">Comment</label>
+                <input type="text" class="form-control" id="comment" placeholder="Write a review">
+            </div>
+            <button type="submit" class="btn btn-raised btn-warning float-right">Comment</button>
+        </form>
     </div>
-    <div class="card" style="width: 15rem; margin-right: 5%">
-      <img class="card-img-top" style="width: 15rem; height: 15rem;" src="../../../assets/book1.jpg" alt="Card image cap">
-      <div class="card-body" style="padding: 5%">
-        <p class="card-title" style="margin: 0px; padding: 0px; font-size: 20px">C Modern Approach</p>
-        <div class="card-text">
-            <p style="margin: 0px; padding: 0px"><strong>Edition: </strong> 1.02.45</p>
-        </div>
-        <a style="margin: 0px;" href="#" class="btn btn-raised btn-warning align-right">VIEW</a>
+</div>
+
+<!-- Modal to reserve a book -->
+<div class="modal fade" id="reserveModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Request for book</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
-    </div>
-    <div class="card" style="width: 15rem;">
-      <img class="card-img-top" style="width: 15rem; height: 15rem;" src="../../../assets/book2.jpeg" alt="Card image cap">
-      <div class="card-body" style="padding: 5%">
-        <p class="card-title" style="margin: 0px; padding: 0px; font-size: 20px">C Modern Approach</p>
-        <div class="card-text">
-            <p style="margin: 0px; padding: 0px"><strong>Edition: </strong> 1.02.45</p>
-        </div>
-        <a style="margin: 0px;" href="#" class="btn btn-raised btn-warning align-right">VIEW</a>
+      <div class="modal-body">
+        <form>
+            <div class="form-group">
+                <label for="check-out" class="bmd-label-floating">Check-out</label>
+                <input type="date" class="form-control" id="check-out" placeholder="Check-out date">
+            </div>
+            <div class="form-group">
+                    <label for="check-in" class="bmd-label-floating">Check-in</label>
+                    <input type="date" class="form-control" id="check-in" placeholder="Check-in date">
+                </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-warning">Reserve</button>
       </div>
     </div>
   </div>

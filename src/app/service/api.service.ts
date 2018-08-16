@@ -11,7 +11,8 @@ import { environment } from '../../environments/environment';
 @Injectable()
 export class ApiService {
 
-  private ROOT_URL: string;
+  private ROOT_URL: String;
+  private AUTH_URL: String;
   private TIMEOUT = environment.timeout;
   private httpOptions = {headers: new Headers()};
 
@@ -19,7 +20,8 @@ export class ApiService {
     var protocol = environment.protocol;
     var domain = environment.domain;
     var port = environment.port;
-    this.ROOT_URL = protocol + '://' + domain + ':' + port;
+    this.ROOT_URL = `${protocol}://${domain}:${port}/api/v1`;
+    this.AUTH_URL = `${protocol}://${domain}:${port}`;
   }
 
   private getHeader(tokenType: TokenType) {
@@ -30,17 +32,22 @@ export class ApiService {
       var clientSecret = environment.clientSecret;
       headerContent.append("Authorization", "Basic " + btoa(clientId + ":" + clientSecret))
     } else if ( tokenType == TokenType.BEARER ) {
-      var token = this.getToken();
-      headerContent.append("Authorization", "Bearer " + token.getAccessToken());
+      return;
+
+      // var token = this.getToken();
+      // headerContent.append("Authorization", "Bearer " + token.getAccessToken());
     }
     console.log(headerContent);
     return {headers: headerContent};
   }
 
-  public post(endpoint: string, data: object, tokenType: TokenType, successFxn: Function,
+  public post(endpoint: String, data: object, tokenType: TokenType, successFxn: Function,
     errorFxn:Function) {
 
-    const url = this.ROOT_URL + endpoint;
+    let url = `${this.ROOT_URL}${endpoint}`;
+    if (tokenType == TokenType.BASIC) {
+      url = `${this.AUTH_URL}${endpoint}`;
+    }
     if (!navigator.onLine) {
       errorFxn({
         error: 'Timeout',
@@ -57,9 +64,9 @@ export class ApiService {
     }
   }
 
-  public get(endpoint: string, tokenType: TokenType, successFxn: Function, errorFxn:Function) {
+  public get(endpoint: String, tokenType: TokenType, successFxn: Function, errorFxn:Function) {
 
-    const url = this.ROOT_URL + endpoint;
+    const url = `${this.ROOT_URL}${endpoint}`;
     if (!navigator.onLine) {
       errorFxn({
         error: 'Timeout',
@@ -76,10 +83,10 @@ export class ApiService {
     }
   }
 
-  public put(endpoint: string, data: object, tokenType: TokenType, successFxn: Function,
+  public put(endpoint: String, data: object, tokenType: TokenType, successFxn: Function,
     errorFxn:Function) {
 
-    const url = this.ROOT_URL + endpoint;
+      const url = `${this.ROOT_URL}${endpoint}`;
     if (!navigator.onLine) {
       errorFxn({
         error: 'Timeout',
@@ -89,7 +96,7 @@ export class ApiService {
       this.httpOptions = this.getHeader(tokenType);
       this.http.put(url, data, this.httpOptions)
         .subscribe((res: Response) => {
-          successFxn(res.json());
+          successFxn(res);
         }, error => {
           errorFxn(this.handleError(error.json()));
         });
@@ -99,7 +106,7 @@ export class ApiService {
   public delete(endpoint: string, tokenType: TokenType, successFxn: Function,
     errorFxn:Function) {
 
-    const url = this.ROOT_URL + endpoint;
+    const url = `${this.ROOT_URL}${endpoint}`;
     if (!navigator.onLine) {
       errorFxn({
         error: 'Timeout',
@@ -162,9 +169,7 @@ export class ApiService {
 
   private getToken(): Token{
     var token = Token.getInstance();
-    if ( token.getRefreshToken() == null || token.getAccessToken() === null) {
-      this.router.navigate(['/login']);
-    } else if (token.isExpired() == true) {
+    if (token.isExpired() == true) {
       console.log('token expired')
       this.resetAccessToken();
       console.log(Token.getInstance)

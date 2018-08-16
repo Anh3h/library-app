@@ -17,6 +17,10 @@ import { LoginComponent } from './components/login/login.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { ViewBookComponent } from './components/view-book/view-book.component';
 import { BooksComponent } from './components/books/books.component';
+import { SnackBarComponent } from './components/template/snack-bar/snack-bar.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
+import { EditPasswordComponent } from './components/edit-password/edit-password.component';
 
 
 @NgModule({
@@ -29,7 +33,11 @@ import { BooksComponent } from './components/books/books.component';
     LoginComponent,
     SignupComponent,
     ViewBookComponent,
-    BooksComponent
+    BooksComponent,
+    SnackBarComponent,
+    ProfileComponent,
+    EditProfileComponent,
+    EditPasswordComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +46,7 @@ import { BooksComponent } from './components/books/books.component';
     HttpClientModule,
     HttpModule
   ],
-  providers: [],
+  providers: [ApiService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

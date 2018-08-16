@@ -5,10 +5,11 @@
     padding-left: 5%;
     padding-right: 5%
 }
-.signup-container {
+.profile-container {
     margin-left: 30%;
-    margin-top: 15%
+    margin-top: 10%
 }
-.errorEmail {
-    color: red;
+.reset-pwd {
+    color: #ff5722;
+    font-size: 16px;
 }

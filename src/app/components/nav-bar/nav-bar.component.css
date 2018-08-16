@@ -10,3 +10,6 @@ a, .auth-btn {
     margin-top: 0.5%;
     background: rgba(0, 0, 0, 0.3)
 }
+.dropdown-item {
+    color:rgba(0, 0, 0, 0.7);
+}

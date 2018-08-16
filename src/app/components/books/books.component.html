@@ -1,100 +1,23 @@
-<div class="container">
+<div class="container-fluid">
   <div class="row" style="margin-top: 10%">
     <div class="input-group col-sm-7 offset-sm-2">
-      <input type="text" class="form-control" placeholder="Find a by book's title" aria-label="Recipient's username" aria-describedby="basic-addon2">
+      <input type="text" [(ngModel)]="searchText" (keyup)="applyFilter($event.target.value)" class="form-control" placeholder="Find a book by title">
       <div class="input-group-append">
-        <button class="btn btn-raised btn-warning" type="button">SEARCH</button>
+        <button class="btn btn-raised btn-warning" (click)="findBook(searchText)" type="button">SEARCH</button>
       </div>
     </div>
   </div>
-  <div class="container">
-    <div class="row" style="margin-top: 3%;">
-      <strong>Popular books</strong>
-    </div>
-    <div class="row"  style="margin-top: 2%; margin-bottom: 3%">
-      <div class="card" style="width: 15rem; margin-right: 5%">
-        <img class="card-img-top" style="width: 15rem; height: 15rem;" src="../../../assets/book1.jpg" alt="Card image cap">
-        <div class="card-body" style="padding: 3%">
-          <p class="card-title" style="margin: 0px; padding: 0px; font-size: 20px">C Modern Approach</p>
+  <div class="container-fluid">
+    <div class="row grid-row no-gutters" style="margin-top: 4%;">
+      <div class="card col-2" *ngFor="let book of books">
+        <img class="card-img-top img-fluid" *ngIf="!book.coverImage" src="../../../assets/default-img.jpg" alt="Book cover image">
+        <img class="card-img-top img-fluid" *ngIf="book.coverImage" src="{{book.coverImage}}" alt="Book cover image">
+        <div class="card-body">
+          <p class="card-title" >{{ book.title }}</p>
           <div class="card-text">
-              <p style="margin: 0px; padding: 0px"><strong>Edition: </strong> 1.02.45</p>
+              <p class="spacing-0 font-20"><strong>Author: </strong> {{ book.author }}</p>
           </div>
-          <a style="margin: 0px;" (click)="custom_router(book_id)" class="btn btn-raised btn-warning align-right">VIEW</a>
-        </div>
-      </div>
-      <div class="card" style="width: 15rem; margin-right: 3%">
-        <img class="card-img-top" style="width: 15rem; height: 15rem;" src="../../../assets/book2.jpeg" alt="Card image cap">
-        <div class="card-body" style="padding: 5%">
-          <p class="card-title" style="margin: 0px; padding: 0px; font-size: 20px">C Modern Approach</p>
-          <div class="card-text">
-              <p style="margin: 0px; padding: 0px"><strong>Edition: </strong> 1.02.45</p>
-          </div>
-          <a style="margin: 0px;" href="#" class="btn btn-raised btn-warning align-right">VIEW</a>
-        </div>
-      </div>
-      <div class="card" style="width: 15rem; margin-right: 3%">
-        <img class="card-img-top" style="width: 15rem; height: 15rem;" src="../../../assets/book1.jpg" alt="Card image cap">
-        <div class="card-body" style="padding: 5%">
-          <p class="card-title" style="margin: 0px; padding: 0px; font-size: 20px">C Modern Approach</p>
-          <div class="card-text">
-              <p style="margin: 0px; padding: 0px"><strong>Edition: </strong> 1.02.45</p>
-          </div>
-          <a style="margin: 0px;" href="#" class="btn btn-raised btn-warning align-right">VIEW</a>
-        </div>
-      </div>
-      <div class="card" style="width: 15rem;">
-        <img class="card-img-top" style="width: 15rem; height: 15rem;" src="../../../assets/book2.jpeg" alt="Card image cap">
-        <div class="card-body" style="padding: 5%">
-          <p class="card-title" style="margin: 0px; padding: 0px; font-size: 20px">C Modern Approach</p>
-          <div class="card-text">
-              <p style="margin: 0px; padding: 0px"><strong>Edition: </strong> 1.02.45</p>
-          </div>
-          <a style="margin: 0px;" href="#" class="btn btn-raised btn-warning align-right">VIEW</a>
-        </div>
-      </div>
-    </div>
-    <div class="row" style="margin-top: 5%;">
-      <strong>New books</strong>
-    </div>
-    <div class="row"  style="margin-top: 2%; margin-bottom: 3%">
-      <div class="card" style="width: 15rem; margin-right: 3%">
-        <img class="card-img-top" style="width: 15rem; height: 15rem;" src="../../../assets/book1.jpg" alt="Card image cap">
-        <div class="card-body" style="padding: 5%">
-          <p class="card-title" style="margin: 0px; padding: 0px; font-size: 20px">C Modern Approach</p>
-          <div class="card-text">
-            <p style="margin: 0px; padding: 0px"><strong>Edition: </strong> 1.02.45</p>
-          </div>
-          <a style="margin: 0px;" href="#" class="btn btn-raised btn-warning align-right">VIEW</a>
-        </div>
-      </div>
-      <div class="card" style="width: 15rem; margin-right: 3%">
-        <img class="card-img-top" style="width: 15rem; height: 15rem;" src="../../../assets/book2.jpeg" alt="Card image cap">
-        <div class="card-body" style="padding: 5%">
-          <p class="card-title" style="margin: 0px; padding: 0px; font-size: 20px">C Modern Approach</p>
-          <div class="card-text">
-            <p style="margin: 0px; padding: 0px"><strong>Edition: </strong> 1.02.45</p>
-          </div>
-          <a style="margin: 0px;" href="#" class="btn btn-raised btn-warning align-right">VIEW</a>
-        </div>
-      </div>
-      <div class="card" style="width: 15rem; margin-right: 3%">
-        <img class="card-img-top" style="width: 15rem; height: 15rem;" src="../../../assets/book1.jpg" alt="Card image cap">
-        <div class="card-body" style="padding: 5%">
-          <p class="card-title" style="margin: 0px; padding: 0px; font-size: 20px">C Modern Approach</p>
-          <div class="card-text">
-            <p style="margin: 0px; padding: 0px"><strong>Edition: </strong> 1.02.45</p>
-          </div>
-          <a style="margin: 0px;" href="#" class="btn btn-raised btn-warning align-right">VIEW</a>
-        </div>
-      </div>
-      <div class="card" style="width: 15rem;">
-        <img class="card-img-top" style="width: 15rem; height: 15rem;" src="../../../assets/book2.jpeg" alt="Card image cap">
-        <div class="card-body" style="padding: 5%">
-          <p class="card-title" style="margin: 0px; padding: 0px; font-size: 20px">C Modern Approach</p>
-          <div class="card-text">
-            <p style="margin: 0px; padding: 0px"><strong>Edition: </strong> 1.02.45</p>
-          </div>
-          <a style="margin: 0px;" href="#" class="btn btn-raised btn-warning align-right">VIEW</a>
+          <a style="margin: 0px;" (click)="custom_router(book.id)" class="btn btn-raised btn-warning align-right">VIEW</a>
         </div>
       </div>
     </div>
