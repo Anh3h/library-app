@@ -25,3 +25,12 @@
     padding: 0px;
     margin: 0px;
 }
+.arrow {
+    font-size: 50px;
+    display: block
+}
+.arrow-up {
+    margin: 0px;
+    padding: 0px;
+    margin-top: 50%
+}

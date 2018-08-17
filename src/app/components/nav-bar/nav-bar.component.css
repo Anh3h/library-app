@@ -13,3 +13,6 @@ a, .auth-btn {
 .dropdown-item {
     color:rgba(0, 0, 0, 0.7);
 }
+.material-icons {
+    font-size: 25px; margin-left: 4%; cursor: pointer;
+}

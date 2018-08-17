@@ -11,8 +11,8 @@ export interface Book {
 	shelf: String;
 	totalQty: Number;
 	availableQty: Number;
-	upVotes: Number;
-	downVotes: Number;
+	upVotes: number;
+	downVotes: number;
 	numOfBorrows: Number;
 	coverImage: String;
     comments: Array<Comment>;

@@ -78,7 +78,7 @@ export class LoginComponent implements OnInit {
   }
 
   private setNotification(userId):void {
-    let url = `/users/${userId}/notifications`;
+    let url = `/users/${userId}/notifications?done=false`;
     this.apiService.get(url, TokenType.BEARER, (response) => {
       localStorage.setItem('notifications', response.totalElements);
       location.replace("");

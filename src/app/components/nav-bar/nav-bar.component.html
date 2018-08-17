@@ -22,7 +22,7 @@
     </form>
     <button *ngIf="!isAuthenticated" style="margin-left: 5%" class="btn auth-btn" routerLink="/login">LOGIN</button>
     <button *ngIf="!isAuthenticated" class="btn auth-btn" routerLink="/sign-up">SIGN UP</button>
-    <i *ngIf="isAuthenticated" class="material-icons" style="font-size: 25px; margin-left: 4%;">notifications</i>
+    <i *ngIf="isAuthenticated" routerLink="/notifications" class="material-icons">notifications</i>
     <p style="margin-right: 1%">{{ notifications }}</p>
     <button *ngIf="isAuthenticated" class="btn auth-btn" routerLink="/profile">ACCOUNT</button>
     <button *ngIf="isAuthenticated" class="btn auth-btn" (click)="logout()">LOG OUT</button>

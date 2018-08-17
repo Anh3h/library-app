@@ -21,6 +21,8 @@ import { SnackBarComponent } from './components/template/snack-bar/snack-bar.com
 import { ProfileComponent } from './components/profile/profile.component';
 import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
 import { EditPasswordComponent } from './components/edit-password/edit-password.component';
+import { FavoriteBooksComponent } from './components/favorite-books/favorite-books.component';
+import { NotificationsComponent } from './components/notifications/notifications.component';
 
 
 @NgModule({
@@ -37,7 +39,9 @@ import { EditPasswordComponent } from './components/edit-password/edit-password.
     SnackBarComponent,
     ProfileComponent,
     EditProfileComponent,
-    EditPasswordComponent
+    EditPasswordComponent,
+    FavoriteBooksComponent,
+    NotificationsComponent
   ],
   imports: [
     BrowserModule,

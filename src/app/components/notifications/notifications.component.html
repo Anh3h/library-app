@@ -1,0 +1,36 @@
+<div class="container-fluid">
+    <div class="container card">
+      <div class="card-body">
+        <h5 class="card-title">New Notifications</h5>
+        <hr>
+        <div>
+          <div>
+            <table class="table table-hover">
+              <thead class="thead-light">
+                <tr>
+                  <!-- <th scope="col">#</th> -->
+                  <th scope="col">Book Title</th>
+                  <th scope="col">Author</th>
+                  <th scope="col">Edition</th>
+                  <th scope="col">Action</th>
+                  <th scope="col">Content</th>
+                  <th scope="col">User</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let notification of notifications" (click)="redirect(notification.book.id)">
+                  <!-- <th scope="row">1</th> -->
+                  <td>{{notification.book.title}}</td>
+                  <td>{{notification.book.author}}</td>
+                  <td>{{notification.book.edition}}</td>
+                  <td>{{notification.action}}</td>
+                  <td>{{notification.content}}</td>
+                  <td>{{notification.user.firstName}} {{notification.user.lastName}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

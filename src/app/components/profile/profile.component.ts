@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { User } from '../../model/User';
 import { Transaction } from '../../model/Transaction';
@@ -15,7 +16,7 @@ export class ProfileComponent implements OnInit {
   public user = {} as User
   public transactions: Array<Transaction>;
 
-  constructor( private apiService:ApiService ) { }
+  constructor( private apiService:ApiService, private router:Router ) { }
 
   ngOnInit() {
     this.getUser(localStorage.getItem("userId"));
@@ -37,6 +38,10 @@ export class ProfileComponent implements OnInit {
     }, (error) => {
       console.log(error);
     })
+  }
+
+  public redirect(bookId):void {
+    this.router.navigate([`/books/${bookId}/view`]);
   }
 
 }
