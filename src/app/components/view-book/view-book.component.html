@@ -19,7 +19,7 @@
           <p class="spacing-0">By {{ book.author }}</p>
           <p class="spacing-0"><strong>ISBN </strong><span>{{ book.edition }}</span></p>
 
-          <button type="submit" style="margin-top: 20%" class="btn btn-raised btn-warning" data-toggle="modal" data-target="#reserveModal">Reserve</button>
+          <button (click)="verifyAuthenticity()" style="margin-top: 20%" class="btn btn-raised btn-warning" data-toggle="modal" data-target="#reserveModal">Reserve</button>
       </div>
       <div class="col-3 side-box">
           <h5>Popular Books</h5>
@@ -47,7 +47,7 @@
 						</div>
 				</div>
     </div>
-    <div class="row comment" *ngIf="">
+    <div class="row comment" *ngIf="isAuthenticated">
         <form (ngSubmit)="addComment()" #commentForm="ngForm" class="col-8">
             <div class="form-group">
                 <label for="comment" class="bmd-label-floating">Comment</label>
@@ -69,20 +69,23 @@
         </button>
       </div>
       <div class="modal-body">
+        <div *ngIf="error.status" class="alert alert-danger center" role="alert">
+          {{ error.message }}
+        </div>
         <form>
             <div class="form-group">
                 <label for="check-out" class="bmd-label-floating">Check-out</label>
-                <input type="date" class="form-control" id="check-out" placeholder="Check-out date">
+                <input type="date" [(ngModel)]="transaction.checkOut" min="now" class="form-control" name="check-out" placeholder="Check-out date">
             </div>
             <div class="form-group">
-                    <label for="check-in" class="bmd-label-floating">Check-in</label>
-                    <input type="date" class="form-control" id="check-in" placeholder="Check-in date">
-                </div>
+                <label for="check-in" class="bmd-label-floating">Check-in</label>
+                <input type="date" [(ngModel)]="transaction.checkIn" class="form-control" name="check-in" placeholder="Check-in date">
+            </div>
         </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-warning">Reserve</button>
+        <button type="button" class="btn btn-warning" (click)="reserveBook()">Reserve</button>
       </div>
     </div>
   </div>

@@ -48,79 +48,51 @@ export class ApiService {
     if (tokenType == TokenType.BASIC) {
       url = `${this.AUTH_URL}${endpoint}`;
     }
-    if (!navigator.onLine) {
-      errorFxn({
-        error: 'Timeout',
-        message: 'Unable to access server'
+    this.httpOptions = this.getHeader(tokenType);
+    this.http.post(url, data, this.httpOptions)
+      .subscribe((res: Response) => {
+        successFxn(res.json());
+      }, error => {
+        errorFxn(this.handleError(error.json()));
       });
-    } else {
-      this.httpOptions = this.getHeader(tokenType);
-      this.http.post(url, data, this.httpOptions)
-        .subscribe((res: Response) => {
-          successFxn(res.json());
-        }, error => {
-          errorFxn(this.handleError(error.json()));
-        });
-    }
   }
 
   public get(endpoint: String, tokenType: TokenType, successFxn: Function, errorFxn:Function) {
 
     const url = `${this.ROOT_URL}${endpoint}`;
-    if (!navigator.onLine) {
-      errorFxn({
-        error: 'Timeout',
-        message: 'Unable to access server'
+    this.httpOptions = this.getHeader(tokenType);
+    this.http.get(url, this.httpOptions)
+      .subscribe((res: Response) => {
+        successFxn(res.json());
+      }, error => {
+        errorFxn(this.handleError(error.json()));
       });
-    } else {
-      this.httpOptions = this.getHeader(tokenType);
-      this.http.get(url, this.httpOptions)
-        .subscribe((res: Response) => {
-          successFxn(res.json());
-        }, error => {
-          errorFxn(this.handleError(error.json()));
-        });
-    }
   }
 
   public put(endpoint: String, data: object, tokenType: TokenType, successFxn: Function,
     errorFxn:Function) {
 
-      const url = `${this.ROOT_URL}${endpoint}`;
-    if (!navigator.onLine) {
-      errorFxn({
-        error: 'Timeout',
-        message: 'Unable to access server'
+    const url = `${this.ROOT_URL}${endpoint}`;
+    this.httpOptions = this.getHeader(tokenType);
+    this.http.put(url, data, this.httpOptions)
+      .subscribe((res: Response) => {
+        successFxn(res);
+      }, error => {
+        errorFxn(this.handleError(error.json()));
       });
-    } else {
-      this.httpOptions = this.getHeader(tokenType);
-      this.http.put(url, data, this.httpOptions)
-        .subscribe((res: Response) => {
-          successFxn(res);
-        }, error => {
-          errorFxn(this.handleError(error.json()));
-        });
-    }
   }
 
   public delete(endpoint: string, tokenType: TokenType, successFxn: Function,
     errorFxn:Function) {
 
     const url = `${this.ROOT_URL}${endpoint}`;
-    if (!navigator.onLine) {
-      errorFxn({
-        error: 'Timeout',
-        message: 'Unable to access server'
+    this.httpOptions = this.getHeader(tokenType);
+    this.http.delete(url, this.httpOptions)
+      .subscribe((res: Response) => {
+        successFxn(res.json());
+      }, (error) => {
+        errorFxn(this.handleError(error.json()));
       });
-    } else {
-      this.httpOptions = this.getHeader(tokenType);
-      this.http.delete(url, this.httpOptions)
-        .subscribe((res: Response) => {
-          successFxn(res.json());
-        }, error => {
-          errorFxn(this.handleError(error.json()));
-        });
-    }
   }
 
   private handleError (error) {
@@ -142,16 +114,10 @@ export class ApiService {
           message: 'Session expired'
         };
       }
-    } else if (error.error == undefined || error.error == null){
-      return {
-        error: 'Error',
-        message: 'Server is not available at the moment'
-      };
     }
-    console.log(error)
     return {
-      error: error.error,
-      message: error.error_description ? error.error_description: error.error
+      error: error.code,
+      message: error.message
     };
   }
 

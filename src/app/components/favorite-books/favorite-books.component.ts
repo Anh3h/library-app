@@ -23,7 +23,6 @@ export class FavoriteBooksComponent implements OnInit {
     let userId = localStorage.getItem('userId');
     this.apiService.get(`${this.url}${userId}`, TokenType.BEARER, (data) => {
       this.books = data.favoriteBooks;
-      console.log(data);
     }, (error) => {
       console.log(error);
     });

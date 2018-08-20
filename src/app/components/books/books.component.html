@@ -17,10 +17,12 @@
           <div class="card-text">
               <p class="spacing-0 font-20 author"><strong>Author: </strong> {{ book.author }}</p>
           </div>
-          <a *ngIf="isAuthenticated && favoriteBookIds.indexOf(book.id) > 0" (click)="addFavorite(book.id)" class="action-btn btn btn-raised btn-warning ">FAVORITE</a>
+          <a *ngIf="isAuthenticated && favoriteBookIds.indexOf(book.id) < 0" (click)="addFavorite(book.id)" class="action-btn btn btn-raised btn-warning ">FAVORITE</a>
           <a (click)="custom_router(book.id)" class="action-btn btn btn-raised btn-warning align-right">VIEW</a>
         </div>
       </div>
     </div>
   </div>
+  <app-paginator  (goPrevious)="onPrevious()" (goNext)="onNext()" (goPage)="goToPage($event)"
+  [paginator]="page"></app-paginator>
 </div>

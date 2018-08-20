@@ -28,7 +28,7 @@ export class NavBarComponent implements OnInit {
   public logout():void {
     localStorage.removeItem("token");
     localStorage.removeItem("notifications");
-    localStorage.removeItem("user");
+    localStorage.removeItem("userId");
     location.replace("");
   }
 

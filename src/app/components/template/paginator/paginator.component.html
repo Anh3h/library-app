@@ -1,0 +1,9 @@
+<section *ngIf="paginator.numberOfElements > 0">
+  <div>
+      <div class="pagination ">
+          <button (click)="onPrevious()" [disabled]="paginator.first" >&laquo;</button>
+          <button [ngClass]="{'active': isActive(pageNum)}" *ngFor="let pageNum of getPages()" (click)="onPage(pageNum)">{{ pageNum }}</button>
+          <button (click)="onNext()" [disabled]="paginator.last">&raquo;</button>
+      </div>
+  </div>
+</section>

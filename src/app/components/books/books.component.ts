@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 
 import { Book } from '../../model/Book';
 import { User } from '../../model/User';
+import { Page } from '../../model/Page';
 import { ApiService, TokenType } from '../../service/api.service';
 
 @Component({
@@ -16,9 +17,11 @@ export class BooksComponent implements OnInit {
   private url:String = "/books";
   public searchText:String;
   public books:Book[];
-  public favoriteBookIds:Book[] = [];
+  public favoriteBookIds:String[] = [];
   private backup: Book[];
   public user = {} as User;
+  public page = {} as Page;
+  public pageParams = { size: 10, page: 1 }
 
   constructor( private apiService: ApiService, private router:Router ) { }
 
@@ -38,6 +41,21 @@ export class BooksComponent implements OnInit {
     }, (error) => {
       console.log(error);
     })
+  }
+
+  public onPrevious() {
+    this.pageParams.page = (this.page.number - 1);
+    this.getBooks();
+  }
+
+  public onNext() {
+    this.pageParams.page = (this.page.number + 1);
+    this.getBooks();
+  }
+
+  public goToPage(n: number) {
+    this.pageParams.page = (n-1);
+    this.getBooks();
   }
 
   private setFavoriteBookIds() {
@@ -62,7 +80,17 @@ export class BooksComponent implements OnInit {
   }
 
   private getBooks():void {
-    this.apiService.get(this.url, TokenType.BEARER, (data) => {
+    this.apiService.get(`${this.url}?size=${this.pageParams.size}&page=${this.pageParams.page}`, TokenType.BEARER, (data) => {
+      this.page.first = data.first ;
+      this.page.last = data.last;
+      this.page.number = data.number;
+      this.page.numberOfElements = data.numberOfElements;
+      this.page.size = data.size;
+      this.page.sort = data.sort;
+      this.page.totalElements = data.totalElements;
+      this.page.number = data.number;
+      this.page.totalPages = data.totalPages;
+
       this.books = data.content;
       this.backup = data.content;
     }, (error) => {

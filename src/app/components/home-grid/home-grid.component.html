@@ -13,7 +13,8 @@
         <div class="card-text">
           <p class="spacing-0"><strong>Author: </strong> {{ book1.author }}</p>
         </div>
-        <a (click)="custom_router(book1.id)" class="btn btn-raised btn-warning align-right">VIEW</a>
+        <a *ngIf="isAuthenticated && favoriteBookIds.indexOf(book1.id) < 0" (click)="addFavorite(book.id)" class="action-btn btn btn-raised btn-warning ">FAVORITE</a>
+        <a (click)="custom_router(book1.id)" class="btn btn-raised btn-warning align-right action-btn">VIEW</a>
       </div>
     </div>
   </div>
@@ -31,7 +32,8 @@
         <div class="card-text">
             <p class="spacing-0 font-20"><strong>Author: </strong> {{ book.author }}</p>
         </div>
-        <a (click)="custom_router(book.id)" class="btn btn-raised btn-warning align-right">VIEW</a>
+        <a *ngIf="isAuthenticated && favoriteBookIds.indexOf(book.id) < 0" (click)="addFavorite(book.id)" class="action-btn btn btn-raised btn-warning ">FAVORITE</a>
+        <a (click)="custom_router(book.id)" class="btn btn-raised btn-warning action-btn align-right">VIEW</a>
       </div>
     </div>
   </div>

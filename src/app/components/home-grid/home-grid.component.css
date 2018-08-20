@@ -25,6 +25,9 @@
     margin-top: 2%;
     margin-bottom: 3%
 }
+.action-btn {
+    margin: 0px; margin-top: 5%
+}
 strong {
     margin-left: 4%
 }

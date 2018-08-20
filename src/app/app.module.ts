@@ -23,6 +23,7 @@ import { EditProfileComponent } from './components/edit-profile/edit-profile.com
 import { EditPasswordComponent } from './components/edit-password/edit-password.component';
 import { FavoriteBooksComponent } from './components/favorite-books/favorite-books.component';
 import { NotificationsComponent } from './components/notifications/notifications.component';
+import { PaginatorComponent } from './components/template/paginator/paginator.component';
 
 
 @NgModule({
@@ -41,7 +42,8 @@ import { NotificationsComponent } from './components/notifications/notifications
     EditProfileComponent,
     EditPasswordComponent,
     FavoriteBooksComponent,
-    NotificationsComponent
+    NotificationsComponent,
+    PaginatorComponent
   ],
   imports: [
     BrowserModule,
