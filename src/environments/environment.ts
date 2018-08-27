@@ -6,7 +6,7 @@
 export const environment = {
   production: false,
   protocol: 'http',
-  domain: 'localhost',
+  domain: '35.231.42.180',
   port: '8080',
   timeout: 5000,
   clientId: "admin",
